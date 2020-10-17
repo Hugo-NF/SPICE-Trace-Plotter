@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 class Plotter:
@@ -8,8 +9,17 @@ class Plotter:
         plots = []
         ax1.set_xlabel(options['x_label'])
         ax1.set_ylabel(options['y_label'])
+
+        scaler = lambda m: m * options['x_transform']
+        np_scaler = np.vectorize(scaler)
+        data['time'] = np_scaler(data['time'])
+
         for trace in options['traces'].keys():
             if options['traces'][trace]['scale'] == 'n':
+                scaler = lambda m: m * options['y_transform']
+                np_scaler = np.vectorize(scaler)
+                data[trace] = np_scaler(data[trace])
+
                 plots.append(ax1.plot(data['time'],
                                       data[trace],
                                       marker=options['traces'][trace]['marker'],
@@ -24,6 +34,10 @@ class Plotter:
             ax2.set_ylabel(options['right_y_label'])  # we already handled the x-label with ax1
             for trace in options['traces'].keys():
                 if options['traces'][trace]['scale'] == 'y':
+                    scaler = lambda m: m * options['right_y_transform']
+                    np_scaler = np.vectorize(scaler)
+                    data[trace] = np_scaler(data[trace])
+
                     plots.append(ax2.plot(data['time'],
                                           data[trace],
                                           marker=options['traces'][trace]['marker'],
