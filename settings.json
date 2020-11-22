@@ -1,0 +1,41 @@
+{
+    "input": "docs/Boost.txt",
+    "output": "docs/boost.png",
+    "title": "Conversor Boost",
+    "two_scales": true,
+    "x_axis": {
+      "label": "Tempo (ms)",
+      "transform": 1000
+    },
+    "y_axis": {
+      "left": {
+        "label": "Tensão (V)",
+        "transform": 1
+      },
+      "right": {
+        "label": "Corrente (mA)",
+        "transform": 1000
+      }
+    },
+    "traces": {
+      "left": {
+        "V(vin)": {
+            "label": "Vin",
+            "color": "blue",
+            "marker": ""
+        },
+        "V(vout)": {
+            "label": "Vout",
+            "color": "green",
+            "marker": ""
+        }
+      },
+      "right": {
+        "I(R1)": {
+            "label": "I(R1)",
+            "color": "red",
+            "marker": ""
+        }
+      }
+    }
+}
